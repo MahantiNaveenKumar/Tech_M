@@ -1,0 +1,26 @@
+using System;
+
+class Program
+{
+    // Declare a delegate
+    public delegate void Notify();
+
+    // Methods to be assigned to the delegate
+    public static void SendEmail() => Console.WriteLine("Email sent to the user.");
+    public static void SendSMS() => Console.WriteLine("SMS sent to the user.");
+    public static void PushNotification() => Console.WriteLine("Push notification sent to the user.");
+
+    static void Main()
+    {
+        // Creating multicast delegate
+        Notify notification = null;
+
+        // Adding multiple methods to the delegate
+        notification += SendEmail;
+        notification += SendSMS;
+        notification += PushNotification;
+
+        // Invoking the multicast delegate with a null check
+        notification?.Invoke();
+    }
+}
