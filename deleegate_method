@@ -1,0 +1,22 @@
+using System;
+
+class Program
+{
+    // Declare a delegate
+    delegate void MathOperation(int x, int y);
+
+    // Method that matches the delegate signature
+    static void Add(int a, int b)
+    {
+        Console.WriteLine("Sum: " + (a + b));
+    }
+
+    static void Main()
+    {
+        // Assign the Add method to the delegate
+        MathOperation operation = Add;
+
+        // Call the method using the delegate
+        operation(5, 10);
+    }
+}
