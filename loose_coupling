@@ -1,0 +1,52 @@
+using System;
+
+// Step 1: Define an interface for abstraction
+interface IEngine
+{
+    void Start();
+}
+
+// Step 2: Implement different engine types
+class PetrolEngine : IEngine
+{
+    public void Start() => Console.WriteLine("Petrol Engine started.");
+}
+
+class DieselEngine : IEngine
+{
+    public void Start() => Console.WriteLine("Diesel Engine started.");
+}
+
+// Step 3: Car class depends on abstraction (IEngine) instead of a concrete class
+class Car
+{
+    private readonly IEngine _engine;
+
+    public Car(IEngine engine) // Constructor Injection
+    {
+        _engine = engine;
+    }
+
+    public void Drive()
+    {
+        _engine.Start();
+        Console.WriteLine("Car is moving.");
+    }
+}
+
+// Step 4: Usage in Main method
+class Program
+{
+    static void Main()
+    {
+        IEngine engine = new PetrolEngine(); // Easily switch to DieselEngine if needed
+        Car car = new Car(engine);
+        car.Drive();
+
+        Console.WriteLine("\nSwitching Engine...\n");
+
+        engine = new DieselEngine(); // Changing engine type dynamically
+        car = new Car(engine);
+        car.Drive();
+    }
+}
